@@ -11,5 +11,48 @@ main {
   font-size: 20px;
   font-weight: 600;
   text-align: center;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* .input-row input {
+  width: 260px;
+  height: 33px;
+  font-size: 20px;
+  padding: 8px;
+} */
+
+.input-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 9cqb;
+  margin-bottom: 30px;
+}
+
+.input-board-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #111111;
+  width: 60px;
+  height: 60px;
+}
+
+.result-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 120px;
+}
+
+.result-board-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #d3d6da;
+  width: 60px;
+  height: 60px;
 }
