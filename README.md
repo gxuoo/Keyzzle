@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Keyzzle
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Keyzzle**는 6글자 단어 세종대학교 개발 동아리 `GREEDY`를 맞히는 게임입니다.
+정답을 맞출 때까지 도전할 수 있으며, 게임 진행 시간에 따른 점수를 획득할 수 있습니다.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🎮 게임 특징
 
-### `npm start`
+- ✅ 정답 단어: `GREEDY` (고정)
+- ⏱ 실시간 타이머로 플레이 시간 표시
+- 🔠 6글자 입력 블록 (원형 UI)
+- 🎨 정답 여부에 따라 색상 피드백 (초록/노랑/회색)
+- ⌨️ 가상 키보드 UI로 입력 가능
+- 🔁 정답을 맞출 때까지 무한히 시도 가능
+- ⌨️ 키보드의 입력은 랜덤!! 어떤 Key가 G, R, E, D, Y를 입력할 수 있는지 찾아야 합니다!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠 사용 기술
 
-### `npm test`
+- React (Create React App)
+- JavaScript
+- CSS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🚀 시작하기
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. 프로젝트 클론
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/gxuoo/keyzzle.git
+cd keyzzle
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm install
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+npm start
