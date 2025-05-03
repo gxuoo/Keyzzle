@@ -5,13 +5,16 @@ import Result from "./Result.jsx";
 import { useState } from "react";
 
 export default function Main() {
-    const [userInputValue, setUserInputValue] = useState('');
+  const [userInputValue, setUserInputValue] = useState([]);
 
-    return (
-        <main className="main">
-            <Timer />
-            <Input setUserInputValue={setUserInputValue} />
-            <Result userInputValue={userInputValue}/>
-        </main>
-    )
+  return (
+    <main className="main">
+      <Timer />
+      <Input
+        userInputValue={userInputValue}
+        setUserInputValue={setUserInputValue}
+      />
+      <Result userInputValue={userInputValue} />
+    </main>
+  );
 }
