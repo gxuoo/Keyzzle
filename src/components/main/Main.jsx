@@ -5,17 +5,13 @@ import Result from "./Result.jsx";
 import { useState } from "react";
 
 export default function Main() {
-  const [userInputValue, setUserInputValue] = useState([]);
+  // const [userInputValue, setUserInputValue] = useState([]);
   const [resultValue, setResultValue] = useState([]);
   console.log(resultValue);
   return (
     <main className="main">
       <Timer />
-      <Input
-        userInputValue={userInputValue}
-        setUserInputValue={setUserInputValue}
-        setResultValue={setResultValue}
-      />
+      <Input setResultValue={setResultValue} />
       <Result resultValue={resultValue} />
     </main>
   );

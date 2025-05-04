@@ -1,13 +1,12 @@
 import { useEffect } from "react";
+import { useState } from "react";
 
-export default function Input({
-  userInputValue,
-  setUserInputValue,
-  setResultValue,
-}) {
+export default function Input({ setResultValue }) {
   const inputBlocks = Array.from({ length: 6 }, (_, i) => ({
     id: `input-block-${i}`,
   }));
+
+  const [userInputValue, setUserInputValue] = useState([]);
 
   useEffect(() => {
     const handleKeydown = (e) => {
