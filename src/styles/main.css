@@ -27,7 +27,7 @@ main {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  margin-top: 9cqb;
+  margin-top: 65px;
   margin-bottom: 30px;
 }
 
@@ -36,8 +36,8 @@ main {
   justify-content: center;
   align-items: center;
   border: 3px solid #111111;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }
 
 .result-row {
@@ -45,7 +45,7 @@ main {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  margin-bottom: 120px;
+  margin-bottom: 100px;
 }
 
 .result-board-block {
@@ -53,6 +53,6 @@ main {
   justify-content: center;
   align-items: center;
   border: 3px solid #d3d6da;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }

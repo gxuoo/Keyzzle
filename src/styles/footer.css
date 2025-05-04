@@ -12,12 +12,12 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 7px;
-  padding : 5px;
+  padding: 5px;
 }
 
 .key-block {
-  width: 80px;
-  height: 60px;
+  width: 120px;
+  height: 80px;
   background-color: #d3d6da;
   font-weight: bold;
   font-size: 20px;
