@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
-export default function Input({ setResultValue }) {
+export default function Input({ setResultValue, keyMap }) {
   const inputBlocks = Array.from({ length: 6 }, (_, i) => ({
     id: `input-block-${i}`,
   }));
@@ -10,15 +10,18 @@ export default function Input({ setResultValue }) {
 
   useEffect(() => {
     const handleKeydown = (e) => {
-      const key = e.key;
+      const key = e.key.toUpperCase(); // 대문자로 변경
       if (!/^[a-zA-Z]$/.test(key)) return; // 알파벳만 허용
       if (userInputValue.length >= 6) return; //6글자까지만 허용
       setUserInputValue([...userInputValue, key.toUpperCase()]);
+      
+      const mappedKey = keyMap ? keyMap[key] : key;
+      setUserInputValue([...userInputValue, mappedKey.toUpperCase()]);
     };
 
     window.addEventListener("keydown", handleKeydown);
     return () => window.removeEventListener("keydown", handleKeydown);
-  }, [userInputValue, setUserInputValue]);
+  }, [userInputValue, keyMap]);
 
   useEffect(() => {
     if (userInputValue.length === 6) {

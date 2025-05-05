@@ -1,4 +1,4 @@
-export default function Result({ resultValue }) {
+export default function Result({ keyMap, resultValue }) {
   const answer = "GREEDY";
 
   const resultBlocks = Array.from({ length: 6 }, (_, i) => {
