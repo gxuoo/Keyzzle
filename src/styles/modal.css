@@ -46,4 +46,7 @@
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
+  &:hover {
+  background-color: rgb(9, 107, 9);
+  }
 }
