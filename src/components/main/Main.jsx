@@ -19,7 +19,7 @@ export default function Main() {
     <main className="main">
       <Timer />
       <Input setResultValue={setResultValue} keyMap={keyMap} />
-      <Result keyMap={keyMap} resultValue={resultValue} />
+      <Result resultValue={resultValue} />
       <Keyboard keyMap={keyMap} resultValue={resultValue} />
     </main>
   );
