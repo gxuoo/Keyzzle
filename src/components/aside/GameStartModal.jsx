@@ -6,7 +6,19 @@ const GameIntroModal = ({ setIsOpenModal }) => {
 
   const handleStart = () => {
     if(studentId) {
-      localStorage.setItem('studentId', JSON.stringify({ id: studentId }));
+      const existing = localStorage.getItem('studentIds');
+      let arr = [];
+      try {
+        arr = existing ? JSON.parse(existing) : [];
+      } catch {
+        arr = [];
+      }
+      // 여기 중복되는 학번 검사 부분은 추후에 더 좋은 기록으로 덮어쓴다던가 하는 방식이 필요할 듯 합니다.
+      if (!arr.some(item => item.id === studentId)) {
+        arr.push({ id: studentId });
+      }
+      localStorage.setItem('studentIds', JSON.stringify(arr));
+      localStorage.setItem('currentStudentId', studentId);  // 현재 플레이어가 누군지 확인하기 위한 용도.
       setIsOpenModal(false);
     } else {
       alert('학번을 입력해주세요!');
