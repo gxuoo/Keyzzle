@@ -10,6 +10,12 @@ export default function Input({ setResultValue, keyMap }) {
 
   useEffect(() => {
     const handleKeydown = (e) => {
+      if (e.key === 'Backspace') {
+        e.preventDefault();
+        setUserInputValue(prev => prev.slice(0, -1));
+        return;
+      }
+
       const key = e.key.toUpperCase(); // 대문자로 변경
       if (!/^[a-zA-Z]$/.test(key)) return; // 알파벳만 허용
       if (userInputValue.length >= 6) return; //6글자까지만 허용
