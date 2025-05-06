@@ -32,13 +32,22 @@
 
 .game-intro-body {
   width: 100%;
-  height: 80%;
+  height: 70%;
   text-align: center;
+}
+
+.player-id {
+  text-align: center;
+  width: 20%;
+  height: 5%;
+  margin: 1% 0;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .game-start-bt {
   width: 20%;
-  height: 8%;
+  height: 10%;
   border: none;
   border-radius: 10px;
   background-color: rgb(12, 148, 12);
