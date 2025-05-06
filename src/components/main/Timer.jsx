@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-function Timer() {
-  const [seconds, setSeconds] = useState(0);
-
+function Timer({ seconds, setSeconds, gameEnd }) {
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(prev => prev + 1);
-    }, 1000);
+    let interval;
+    
+    if (!gameEnd) {
+      interval = setInterval(() => {
+        setSeconds(prev => prev + 1);
+      }, 1000);
+    }
 
-    return () => clearInterval(interval); // 언마운트 시 정리
-  }, []);
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [gameEnd]);
 
   const formatTime = (totalSeconds) => {
     const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
