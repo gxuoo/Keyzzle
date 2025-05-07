@@ -25,6 +25,17 @@ const GameIntroModal = ({ setGameState }) => {
     }
   };
 
+  const handleChange = (e) => {
+    setStudentId(e.target.value);
+  }
+
+  const handleKey = (e) => {
+    if (e.key === "Backspace") {
+      e.preventDefault();
+      setStudentId(prev => prev.slice(0, -1));
+    }
+  }
+
   return (
     <div className="game-intro-container">
       <div className="game-intro-wrapper">
@@ -36,7 +47,8 @@ const GameIntroModal = ({ setGameState }) => {
           className="player-id"
           placeholder="여기에 학번을 입력해주세요!"
           value={studentId}
-          onChange={e => setStudentId(e.target.value)}
+          onChange={(e) => handleChange(e)}
+          onKeyDown={handleKey}
         />
         <button className="game-start-bt" onClick={handleStart}>
           GAME START
