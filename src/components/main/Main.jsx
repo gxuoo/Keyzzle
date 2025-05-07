@@ -10,12 +10,14 @@ export default function Main({ gameState, setGameState }) {
   const [playTime, setPlayTime] = useState(0);
   const [resultValue, setResultValue] = useState([]);
   const [keyMap, setKeyMap] = useState({});
-  const [gameEnd, setGameEnd] = useState(false);
 
+  // 게임 시작 시 키맵 초기화
   useEffect(() => {
     setKeyMap(createKeyMap());
-  }, [])
-  
+    setPlayTime(0);
+    setResultValue([]);
+  }, []);
+
   return (
     <main className="main">
       <Timer playTime={playTime} setPlayTime={setPlayTime} gameState={gameState} />

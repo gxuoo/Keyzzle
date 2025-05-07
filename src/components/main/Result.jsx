@@ -26,7 +26,6 @@ const Result = ({ resultValue, playTime, setGameState }) => {
 
   useEffect(() => {
     if (isAllCorrect) {
-      setGameEnd(true);
       const currentId = localStorage.getItem('currentStudentId');
       if (!currentId) return;
 
