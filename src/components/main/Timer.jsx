@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 
-function Timer({ seconds, setSeconds, gameEnd }) {
+function Timer({ playTime, setPlayTime, gameState }) {
   useEffect(() => {
     let interval;
-    
-    if (!gameEnd) {
+
+    if (gameState === 'playing') {
       interval = setInterval(() => {
-        setSeconds(prev => prev + 1);
+        setPlayTime(prev => prev + 1);
       }, 1000);
     }
 
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [gameEnd]);
+  }, [setPlayTime, gameState]);
 
   const formatTime = (totalSeconds) => {
     const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
@@ -23,7 +23,7 @@ function Timer({ seconds, setSeconds, gameEnd }) {
 
   return (
     <div className="timer">
-      게임 시간 {formatTime(seconds)}
+      게임 시간 {formatTime(playTime)}
     </div>
   );
 }

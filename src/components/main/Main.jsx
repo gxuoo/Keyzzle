@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import createKeyMap from "./utils/shuffleKey.js";
 import Keyboard from "./Keyboard.jsx";
 
-export default function Main() {
-  const [seconds, setSeconds] = useState(0);
+export default function Main({ gameState, setGameState }) {
+  const [playTime, setPlayTime] = useState(0);
   const [resultValue, setResultValue] = useState([]);
   const [keyMap, setKeyMap] = useState({});
   const [gameEnd, setGameEnd] = useState(false);
@@ -18,9 +18,9 @@ export default function Main() {
   
   return (
     <main className="main">
-      <Timer seconds={seconds} setSeconds={setSeconds} gameEnd={gameEnd} />
+      <Timer playTime={playTime} setPlayTime={setPlayTime} gameState={gameState} />
       <Input setResultValue={setResultValue} keyMap={keyMap} />
-      <Result resultValue={resultValue} seconds={seconds} setGameEnd={setGameEnd} />
+      <Result resultValue={resultValue} playTime={playTime} setGameState={setGameState} />
       <Keyboard keyMap={keyMap} resultValue={resultValue} />
     </main>
   );

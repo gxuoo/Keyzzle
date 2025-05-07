@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const Result = ({ resultValue, seconds, setGameEnd }) => {
+const Result = ({ resultValue, playTime, setGameState }) => {
   const answer = "GREEDY";
 
   const resultBlocks = Array.from({ length: 6 }, (_, i) => {
@@ -41,14 +41,15 @@ const Result = ({ resultValue, seconds, setGameEnd }) => {
       const studentIndex = students.findIndex(s => s.id === currentId);
       if (studentIndex !== -1) {
         const updatedStudents = [...students];
-        updatedStudents[studentIndex] = { 
-          ...updatedStudents[studentIndex], 
-          completionTime: seconds 
+        updatedStudents[studentIndex] = {
+          ...updatedStudents[studentIndex],
+          completionTime: playTime
         };
         localStorage.setItem('studentIds', JSON.stringify(updatedStudents));
       }
+      setGameState('result');
     }
-  }, [isAllCorrect, seconds]);
+  }, [isAllCorrect, playTime, setGameState]);
 
   return (
     <div className="result-row">

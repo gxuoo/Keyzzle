@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import '../../styles/modal.css';
 
-const GameIntroModal = ({ setIsOpenModal }) => {
+const GameIntroModal = ({ setGameState }) => {
   const [studentId, setStudentId] = useState('');
 
   const handleStart = () => {
-    if(studentId) {
+    if (studentId) {
       const existing = localStorage.getItem('studentIds');
       let arr = [];
       try {
@@ -19,7 +19,7 @@ const GameIntroModal = ({ setIsOpenModal }) => {
       }
       localStorage.setItem('studentIds', JSON.stringify(arr));
       localStorage.setItem('currentStudentId', studentId);  // 현재 플레이어가 누군지 확인하기 위한 용도.
-      setIsOpenModal(false);
+      setGameState('playing');
     } else {
       alert('학번을 입력해주세요!');
     }
