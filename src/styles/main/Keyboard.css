@@ -7,6 +7,15 @@ footer {
   padding: 10px;
 }
 
+.keyboard {
+  flex: 3 1 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .key-row {
   display: flex;
   justify-content: center;
@@ -16,7 +25,7 @@ footer {
 }
 
 .key-block {
-  width: 120px;
+  width: 50px;
   height: 80px;
   background-color: #d3d6da;
   font-weight: bold;
@@ -25,5 +34,5 @@ footer {
   justify-content: center;
   align-items: center;
 
-  border-radius: 20px;
+  border-radius: 10px;
 }

@@ -1,4 +1,4 @@
-main {
+/* main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,12 +15,12 @@ main {
   margin-bottom: 10px;
 }
 
-/* .input-row input {
+.input-row input {
   width: 260px;
   height: 33px;
   font-size: 20px;
   padding: 8px;
-} */
+}
 
 .input-row {
   display: flex;
@@ -55,4 +55,17 @@ main {
   border: 3px solid #d3d6da;
   width: 80px;
   height: 80px;
+} */
+
+/* 수정 main */
+.main {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  margin: 0;
+  padding: 20px 0;
+  box-sizing: border-box;
+  height: 100%;
 }

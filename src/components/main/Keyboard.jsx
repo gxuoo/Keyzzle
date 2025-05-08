@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../../styles/footer.css";
+import "../../styles/main/Keyboard.css";
 
 export default function Keyboard({ keyMap, resultValue }) {
   const answerKeys = new Set(["G", "R", "E", "D", "Y"]);
@@ -15,8 +15,8 @@ export default function Keyboard({ keyMap, resultValue }) {
       const newKeys = resultValue
         .map(v => v?.toUpperCase())
         .filter(v => v);
-      
-      setAccumulatedKeys(prev => 
+
+      setAccumulatedKeys(prev =>
         new Set([...prev, ...newKeys])
       );
     }
@@ -37,7 +37,7 @@ export default function Keyboard({ keyMap, resultValue }) {
                 className="key-block"
                 data-original={key}
                 data-mapped={mappedKey}
-                style={{ 
+                style={{
                   color: isPressed && isAnswer ? "white" : "black",
                   backgroundColor: isPressed && isAnswer ? "#4CAF50" : "#d3d6da",
                   boxSizing: "border-box"

@@ -1,10 +1,10 @@
 import "../../styles/main.css";
-import Timer from "./Timer.jsx";
+import Timer from "../Timer.jsx";
 import Input from "./Input.jsx";
 import Result from "./Result.jsx";
 import { useEffect, useState } from "react";
-import createKeyMap from "./utils/shuffleKey.js";
-import Keyboard from "./Keyboard.jsx";
+import createKeyMap from "../utils/shuffleKey.js";
+import Keyboard from "../Keyboard.jsx";
 
 export default function Main({ gameState, setGameState }) {
   const [playTime, setPlayTime] = useState(0);

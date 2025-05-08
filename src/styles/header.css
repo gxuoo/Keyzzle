@@ -4,28 +4,30 @@
   justify-content: center;
   position: relative;
   border-bottom: 1px solid #d3d6da;
-  height: 80px;
+  height: 8.5%;
+}
+
+.header-greedy,
+.header-title,
+.header-developer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
 }
 
 .header-greedy {
-  position: absolute;
-  margin-left: 40px;
-  left: 0;
-  font-size: x-large;
-  font-weight: bold;
-  color: white;
+  width: 25%;
+  font-size: xx-large;
 }
 
 .header-title {
+  width: 50%;
   font-size: x-large;
-  color: white;
 }
 
 .header-developer {
-  position: absolute;
-  margin-right: 10px;
-  right: 0;
+  width: 25%;
   font-size: large;
-  font-weight: bold;
-  color: white;
 }

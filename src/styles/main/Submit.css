@@ -1,0 +1,20 @@
+.submit {
+    flex: 1 1 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    width: 50%;
+    height: 50%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
