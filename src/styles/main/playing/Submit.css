@@ -9,7 +9,7 @@
 button {
     width: 50%;
     height: 50%;
-    background-color: #4CAF50;
+    background-color: rgb(12, 148, 12);
     color: white;
     border: none;
     border-radius: 15px;
@@ -17,4 +17,8 @@ button {
     font-size: 25px;
     font-weight: bold;
     cursor: pointer;
+
+    &:hover {
+        background-color: rgb(9, 107, 9);
+    }
 }
