@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import Timer from './Timer';
-import Answer from './Answer.jsx';
-import Keyboard from './Keyboard.jsx';
-import Submit from './Submit.jsx';
-import createKeyMap from "./utils/shuffleKey.js";
+import Answer from './Answer';
+import Keyboard from './Keyboard';
+import Submit from './Submit';
+import createKeyMap from "../utils/shuffleKey.js";
 
 export default function GamePlayingModal({ gameState, setGameState }) {
     const [playTime, setPlayTime] = useState(0);

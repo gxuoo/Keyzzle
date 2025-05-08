@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../../styles/main/main.css';
 import GameIntroModal from './GameIntroModal';
-import GamePlayingModal from './GamePlayingModal';
+import GamePlayingModal from './playing/GamePlayingModal';
 import GameResultModal from './GameResultModal';
 
 export default function MainContainer() {

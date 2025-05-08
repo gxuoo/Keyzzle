@@ -1,4 +1,4 @@
-import "../../styles/main/Submit.css";
+import "../../../styles/main/Submit.css";
 
 export default function Submit({ setGameState }) {
     // 정답을 맞추면 결과 페이지로 이동
