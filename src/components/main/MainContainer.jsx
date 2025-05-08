@@ -7,7 +7,7 @@ import GameResultModal from './GameResultModal';
 export default function MainContainer() {
     // 게임 진행 상태 관리
     // 개임 진행 상태: intro(시작 전), result(게임 종료), playing(게임 진행 중)
-    const [gameState, setGameState] = useState('playing');
+    const [gameState, setGameState] = useState('result');
     const [gameKey, setGameKey] = useState(0); // 게임 상태를 초기화하기 위한 키
 
     const handleRestart = () => {
