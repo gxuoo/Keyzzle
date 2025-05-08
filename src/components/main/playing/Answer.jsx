@@ -1,4 +1,4 @@
-import "../../../styles/main/Answer.css";
+import "../../../styles/main/playing/Answer.css";
 
 export default function Answer() {
     return (

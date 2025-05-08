@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../../../styles/main/Keyboard.css";
+import "../../../styles/main/playing/Keyboard.css";
 
 export default function Keyboard({ keyMap, resultValue }) {
   const answerKeys = new Set(["G", "R", "E", "D", "Y"]);
