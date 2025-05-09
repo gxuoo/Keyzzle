@@ -1,11 +1,20 @@
 #root {
-    height: 100%;
-    background-color: #007355;
+  height: 100%;
+  background-color: #007355;
 }
 
 html,
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "ChalkFont";
+  src: url("/Users/shinjiwoo/Downloads/Typo_CrayonM.ttf") format("woff2");
+  font-style: normal;
+}
+* {
+  font-family: "ChalkFont";
 }
