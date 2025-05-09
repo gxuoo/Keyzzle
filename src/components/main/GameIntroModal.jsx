@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../../styles/modal.css';
+import '../../styles/main/intro.css';
 
 const GameIntroModal = ({ setGameState }) => {
   const [studentId, setStudentId] = useState('');
@@ -38,22 +38,19 @@ const GameIntroModal = ({ setGameState }) => {
 
   return (
     <div className="game-intro-container">
-      <div className="game-intro-wrapper">
-        <div className="game-name">KEYZZLE</div>
-        <div className="game-intro-body">
-          여기에 게임 설명을 올리면 하는데, 나중에 화면이 완성되고 이미지랑 함께 넣는게 좋을거 같아요.
-        </div>
-        <input
-          className="player-id"
-          placeholder="여기에 학번을 입력해주세요!"
-          value={studentId}
-          onChange={(e) => handleChange(e)}
-          onKeyDown={handleKey}
-        />
-        <button className="game-start-bt" onClick={handleStart}>
-          GAME START
-        </button>
+      <div className="game-intro-description">
+        여기에 게임 설명을 올리면 하는데, 나중에 화면이 완성되고 이미지랑 함께 넣는게 좋을거 같아요.
       </div>
+      <input
+        className="player-id"
+        placeholder="여기에 학번을 입력해주세요!"
+        value={studentId}
+        onChange={(e) => handleChange(e)}
+        onKeyDown={handleKey}
+      />
+      <button className="game-start-bt" onClick={handleStart}>
+        GAME START
+      </button>
     </div>
   );
 };

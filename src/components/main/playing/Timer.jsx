@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import "../../../styles/main/playing/Timer.css";
 
 function Timer({ playTime, setPlayTime, gameState }) {
   useEffect(() => {

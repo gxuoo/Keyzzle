@@ -1,11 +1,33 @@
-header {
+.header-container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  position: relative;
   border-bottom: 1px solid #d3d6da;
+  height: 8.5%;
+}
+
+.header-greedy,
+.header-title,
+.header-developer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+}
+
+.header-greedy {
+  width: 25%;
+  font-size: xx-large;
 }
 
 .header-title {
-  display: flex;
+  width: 50%;
   font-size: x-large;
+}
+
+.header-developer {
+  width: 25%;
+  font-size: large;
 }
