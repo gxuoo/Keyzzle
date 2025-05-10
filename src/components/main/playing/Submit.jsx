@@ -1,7 +1,7 @@
 import "../../../styles/main/playing/Submit.css";
 import { useState, useEffect } from "react";
 
-export default function Submit({ setGameState, keyMap, setResultValue }) {
+export default function Submit({ setGameState, keyMap }) {
   // 정답을 맞추면 결과 페이지로 이동 (아직 정답 맞추는 로직 없어서 임시로 버튼 누르면 결과 페이지로 이동)
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +33,6 @@ export default function Submit({ setGameState, keyMap, setResultValue }) {
   useEffect(() => {
     if (userInputValue.length === 6) {
       setTimeout(() => {
-        setResultValue(userInputValue);
         setUserInputValue([]);
       }, 300);
     }
