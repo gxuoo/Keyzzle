@@ -36,9 +36,10 @@ export default function Keyboard({ keyMap, resultValue }) {
                 data-original={key}
                 data-mapped={mappedKey}
                 style={{
-                  backgroundColor: "#d3d6da",
+                  backgroundColor: "white",
                   boxSizing: "border-box",
                   color: "#017355",
+                  fontSize: "50px",
                 }}
               >
                 {showEntireMappedKeys ? mappedKey : ""}
