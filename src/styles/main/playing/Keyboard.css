@@ -25,7 +25,7 @@ footer {
 }
 
 .key-block {
-  width: 50px;
+  width: 80px;
   height: 80px;
   background-color: #d3d6da;
   font-weight: bold;
@@ -33,6 +33,6 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-
   border-radius: 10px;
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 1);
 }
