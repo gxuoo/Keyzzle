@@ -16,19 +16,21 @@ export default function Submit({ setGameState, keyMap }) {
   const [userInputValue, setUserInputValue] = useState([]);
 
   useEffect(() => {
-    const handleKeydown = (e) => {
-      const key = e.key.toUpperCase();
-      if (!/^[a-zA-Z]$/.test(key)) return;
-      if (userInputValue.length >= 6) return;
+    if (isSubmitButtonClicked) {
+      const handleKeydown = (e) => {
+        const key = e.key.toUpperCase();
+        if (!/^[a-zA-Z]$/.test(key)) return;
+        if (userInputValue.length >= 6) return;
 
-      // keyMap을 사용하여 키를 매핑하고 업데이트
-      const mappedKey = keyMap ? keyMap[key] : key;
-      setUserInputValue((prevInputValue) => [...prevInputValue, mappedKey]);
-    };
+        // keyMap을 사용하여 키를 매핑하고 업데이트
+        const mappedKey = keyMap ? keyMap[key] : key;
+        setUserInputValue((prevInputValue) => [...prevInputValue, mappedKey]);
+      };
 
-    window.addEventListener("keydown", handleKeydown);
-    return () => window.removeEventListener("keydown", handleKeydown);
-  }, [userInputValue, keyMap]);
+      window.addEventListener("keydown", handleKeydown);
+      return () => window.removeEventListener("keydown", handleKeydown);
+    }
+  }, [isSubmitButtonClicked, userInputValue, keyMap]);
 
   useEffect(() => {
     if (userInputValue.length === 6) {
