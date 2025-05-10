@@ -23,7 +23,7 @@ export default function GamePlayingModal({ gameState, setGameState }) {
         setPlayTime={setPlayTime}
         gameState={gameState}
       />
-      <Answer userInputValue={userInputValue} setGameState={setGameState} />
+      <Answer userInputValue={userInputValue} setGameState={setGameState} playTime={playTime} />
       <Submit
         keyMap={keyMap}
         userInputValue={userInputValue}

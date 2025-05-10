@@ -3,15 +3,30 @@ import "../../../styles/main/playing/Answer.css";
 
 const answer = "GREEDY";
 
-export default function Answer({ userInputValue, setGameState }) {
+export default function Answer({ userInputValue, setGameState, playTime }) {
     useEffect(() => {
         if (userInputValue.length === 6) {
             const userAnswer = userInputValue.join("");
             if (userAnswer === answer) {
+                const currentStudentId = localStorage.getItem('currentStudentId');
+                const savedPlayerRecords = localStorage.getItem('playerRecords');
+                const playerRecords = JSON.parse(savedPlayerRecords);
+
+                const updatedPlayerRecords = playerRecords.map(record => {
+                    if (record.studentId === currentStudentId) {
+                        return {
+                            ...record,
+                            clearTime: playTime
+                        };
+                    }
+                    return record;
+                });
+
+                localStorage.setItem('playerRecords', JSON.stringify(updatedPlayerRecords));
                 setGameState("result");
             }
         }
-    }, [userInputValue, setGameState]);
+    }, [userInputValue, setGameState, playTime]);
 
     return (
         <div className="answer-container">
