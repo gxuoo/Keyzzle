@@ -1,21 +1,64 @@
 import "../../../styles/main/playing/Submit.css";
+import { useState, useEffect } from "react";
 
-export default function Submit({ setGameState }) {
+export default function Submit({ setGameState, keyMap }) {
+  // 정답을 맞추면 결과 페이지로 이동 (아직 정답 맞추는 로직 없어서 임시로 버튼 누르면 결과 페이지로 이동)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    setGameState("result");
+  };
 
-    // 정답을 맞추면 결과 페이지로 이동 (아직 정답 맞추는 로직 없어서 임시로 버튼 누르면 결과 페이지로 이동)
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(e.target.value);
-        setGameState('result');
+  const [isSubmitButtonClicked, setIsSubmitButtonClicked] = useState(false);
+  const inputLines = Array.from({ length: 6 }, (_, i) => ({
+    id: `input-block-${i}`,
+  }));
+  const [userInputValue, setUserInputValue] = useState([]);
+
+  useEffect(() => {
+    const handleKeydown = (e) => {
+      const key = e.key.toUpperCase();
+      if (!/^[a-zA-Z]$/.test(key)) return;
+      if (userInputValue.length >= 6) return;
+
+      // keyMap을 사용하여 키를 매핑하고 업데이트
+      const mappedKey = keyMap ? keyMap[key] : key;
+      setUserInputValue((prevInputValue) => [...prevInputValue, mappedKey]);
+    };
+
+    window.addEventListener("keydown", handleKeydown);
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, [userInputValue, keyMap]);
+
+  useEffect(() => {
+    if (userInputValue.length === 6) {
+      setTimeout(() => {
+        setUserInputValue([]);
+      }, 300);
     }
+  }, [userInputValue]);
 
-    return (
-        <div className="submit" onSubmit={handleSubmit}>
-            {/* 버튼 클릭과 동시에 버튼이 사라지고, 정답을 입력할 수 있는 6글자 입력 언더바가 생성
-                언더바에 정답을 하나씩 입력할 때마다, Answer.jsx에 있는 G R E E D Y의 문자가 하나씩 빛난다.
-                정답을 모두 맞히면 버튼이 다시 생기고, 결과 페이지로 이동한다.
-            */}
-            <button type="submit">정답 제출!</button>
+  return (
+    <div>
+      {!isSubmitButtonClicked ? (
+        <div className="submit-button">
+          <button type="button" onClick={() => setIsSubmitButtonClicked(true)}>
+            정답 제출!
+          </button>
         </div>
-    );
+      ) : (
+        <div className="input-row">
+          {inputLines.map((line, i) => (
+            <div
+              key={line.id}
+              className="input-board-line"
+              data-index={`0${i}`}
+            >
+              {userInputValue[i]}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
