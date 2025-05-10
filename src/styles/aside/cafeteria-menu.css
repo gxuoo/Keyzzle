@@ -14,3 +14,20 @@
     margin: 0;
     color: white;
 }
+
+.cafeteria p {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 10px;
+    color: white;
+
+    &:hover {
+        color: #4CAF50;
+        transform: scale(1.1);
+        text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    }
+}
+
+.cafeteria p:first-of-type {
+    margin-top: 10%;
+}
