@@ -12,9 +12,10 @@ body {
 
 @font-face {
   font-family: "ChalkFont";
-  src: url("/Users/shinjiwoo/Downloads/Typo_CrayonM.ttf") format("woff2");
+  src: url("./asset/fonts/Typo_Crayon_M.ttf") format("truetype");
   font-style: normal;
 }
+
 * {
   font-family: "ChalkFont";
 }
