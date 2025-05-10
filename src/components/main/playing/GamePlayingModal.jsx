@@ -25,7 +25,11 @@ export default function GamePlayingModal({ gameState, setGameState }) {
         gameState={gameState}
       />
       <Answer />
-      <Submit setGameState={setGameState} keyMap={keyMap} />
+      <Submit
+        setGameState={setGameState}
+        keyMap={keyMap}
+        setResultValue={setResultValue}
+      />
       <Keyboard keyMap={keyMap} resultValue={resultValue} />
     </>
   );
