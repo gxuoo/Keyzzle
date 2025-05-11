@@ -1,6 +1,24 @@
 import { useEffect, useState } from "react";
 import "../../styles/main/result.css";
 
+// 공동 순위 계산 함수
+function getRankedList(players) {
+    let rank = 1;
+    let prevTime = null;
+    let sameRankCount = 0;
+
+    return players.map((player, idx) => {
+        if (player.clearTime === prevTime) {
+            sameRankCount++;
+        } else {
+            rank = idx + 1;
+            sameRankCount = 1;
+        }
+        prevTime = player.clearTime;
+        return { ...player, rank };
+    });
+}
+
 function GameResultModal({ setGameState, onRestart }) {
     const [ranking, setRanking] = useState([]);
     const [myResult, setMyResult] = useState(null);
@@ -15,35 +33,36 @@ function GameResultModal({ setGameState, onRestart }) {
     };
 
     useEffect(() => {
-        const savedData = localStorage.getItem('studentIds');
-        let students = [];
+        const savedData = localStorage.getItem('playerRecords');
+        let playerRecords = [];
         try {
-            students = savedData ? JSON.parse(savedData) : [];
+            playerRecords = savedData ? JSON.parse(savedData) : [];
         } catch {
-            students = [];
+            playerRecords = [];
         }
 
         // completionTime이 있는 학생들만 필터링하고 시간순으로 정렬
-        const sortedStudents = students
-            .filter(student => student.completionTime)
-            .sort((a, b) => a.completionTime - b.completionTime)
+        const sortedPlayers = playerRecords
+            .filter(player => player.clearTime)
+            .sort((a, b) => a.clearTime - b.clearTime)
             .slice(0, 5);
 
-        setRanking(sortedStudents);
+        const rankedPlayers = getRankedList(sortedPlayers);
+        setRanking(rankedPlayers);
 
         // 현재 플레이어의 결과 찾기
         const currentId = localStorage.getItem('currentStudentId');
         if (currentId) {
-            const currentStudent = students.find(student => student.id === currentId);
-            if (currentStudent && currentStudent.completionTime) {
-                const rank = students
-                    .filter(student => student.completionTime)
-                    .sort((a, b) => a.completionTime - b.completionTime)
-                    .findIndex(student => student.id === currentId) + 1;
+            const currentPlayer = playerRecords.find(player => player.studentId === currentId);
+            if (currentPlayer && currentPlayer.clearTime) {
+                const rank = playerRecords
+                    .filter(player => player.clearTime)
+                    .sort((a, b) => a.clearTime - b.clearTime)
+                    .findIndex(player => player.studentId === currentId) + 1;
                 setMyResult({
                     rank,
-                    id: currentStudent.id,
-                    completionTime: currentStudent.completionTime
+                    studentId: currentPlayer.studentId,
+                    clearTime: currentPlayer.clearTime
                 });
             }
         }
@@ -71,8 +90,8 @@ function GameResultModal({ setGameState, onRestart }) {
                         <tbody>
                             <tr>
                                 <td>{myResult.rank}위</td>
-                                <td>{myResult.id}</td>
-                                <td>{formatTime(myResult.completionTime)}</td>
+                                <td>{myResult.studentId}</td>
+                                <td>{formatTime(myResult.clearTime)}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -90,11 +109,11 @@ function GameResultModal({ setGameState, onRestart }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {ranking.map((student, index) => (
-                                <tr key={student.id}>
-                                    <td>{index + 1}위</td>
-                                    <td>{student.id}</td>
-                                    <td>{formatTime(student.completionTime)}</td>
+                            {ranking.map((student) => (
+                                <tr key={student.studentId}>
+                                    <td>{student.rank}위</td>
+                                    <td>{student.studentId}</td>
+                                    <td>{formatTime(student.clearTime)}</td>
                                 </tr>
                             ))}
                         </tbody>
