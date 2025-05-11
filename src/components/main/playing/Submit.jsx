@@ -1,19 +1,11 @@
 import "../../../styles/main/playing/Submit.css";
 import { useState, useEffect } from "react";
 
-export default function Submit({ setGameState, keyMap }) {
-  // 정답을 맞추면 결과 페이지로 이동 (아직 정답 맞추는 로직 없어서 임시로 버튼 누르면 결과 페이지로 이동)
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
-    setGameState("result");
-  };
-
+export default function Submit({ keyMap, userInputValue, setUserInputValue }) {
   const [isSubmitButtonClicked, setIsSubmitButtonClicked] = useState(false);
   const inputLines = Array.from({ length: 6 }, (_, i) => ({
     id: `input-block-${i}`,
   }));
-  const [userInputValue, setUserInputValue] = useState([]);
 
   useEffect(() => {
     if (isSubmitButtonClicked) {
