@@ -27,12 +27,19 @@ footer {
 .key-block {
   width: 80px;
   height: 80px;
-  background-color: #d3d6da;
+  box-sizing: border-box;
+  color: #017355;
+  background-color: #FCFCFC;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 1);
+}
+
+.key-block.active {
+  box-shadow: 0 0 30px rgba(256, 256, 256, 0.8);
+  background-color: #efefef;
 }

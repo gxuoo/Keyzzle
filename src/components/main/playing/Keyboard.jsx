@@ -25,7 +25,6 @@ export default function Keyboard({ keyMap }) {
       if (!/^[a-zA-Z]$/.test(key)) return;
 
       const mappedKey = keyMap[key] || key;
-      console.log(mappedKey);
 
       // 아래는 같은 키보드 입력이 반복될 때 깜박이는 현상 방지용입니다. (중복 입력 방지지)
       if (!holdKeys.current.has(mappedKey)) {
@@ -67,15 +66,9 @@ export default function Keyboard({ keyMap }) {
             return (
               <div
                 key={key}
-                className="key-block"
+                className={`key-block ${isCurrentKey ? "active" : ""}`}
                 data-original={key}
                 data-mapped={mappedKey}
-                style={{
-                  backgroundColor: "#FCFCFC",
-                  boxSizing: "border-box",
-                  color: "#017355",
-                  fontSize: "50px",
-                }}
               >
                 {showEntireMappedKeys || isCurrentKey
                   ? mappedKey
