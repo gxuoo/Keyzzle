@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../../../styles/main/playing/Keyboard.css";
 
 export default function Keyboard({ keyMap }) {
@@ -8,8 +8,8 @@ export default function Keyboard({ keyMap }) {
     ["Z", "X", "C", "V", "B", "N", "M"],
   ];
   const [showEntireMappedKeys, setShowEntireMappedKeys] = useState(true);
-  const [currentKey, setCurrentKey] = useState(null);
-  const [showCurrentKey, setShowCurrentKey] = useState(false);
+  const [currentKey, setCurrentKey] = useState([]);
+  const holdKeys = useRef(new Set());
 
   useEffect(() => {
     setTimeout(() => {
@@ -19,21 +19,41 @@ export default function Keyboard({ keyMap }) {
 
   useEffect(() => {
     const handleKeydown = (e) => {
+      if (e.repeat) return; // 키보드 이벤트 중복됨을 방지합니다. (성능 저하 방지용)
+
       const key = e.key.toUpperCase();
       if (!/^[a-zA-Z]$/.test(key)) return;
 
       const mappedKey = keyMap[key] || key;
-      setCurrentKey(mappedKey);
-      setShowCurrentKey(true);
+      console.log(mappedKey);
+
+      // 아래는 같은 키보드 입력이 반복될 때 깜박이는 현상 방지용입니다. (중복 입력 방지지)
+      if (!holdKeys.current.has(mappedKey)) {
+        holdKeys.current.add(mappedKey);
+        setCurrentKey((prev) => [...prev, mappedKey]);
+      }
+    };
+    
+    // 타이머를 키에서 손을 떼었을 때를 기준으로 시작합니다.
+    const handleKeyup = (e) => {
+      const key = e.key.toUpperCase();
+      if (!/^[a-zA-Z]$/.test(key)) return;
+
+      const mappedKey = keyMap[key] || key;
+
+      holdKeys.current.delete(mappedKey);
 
       setTimeout(() => {
-        setShowCurrentKey(false);
-        setCurrentKey(null);
+        setCurrentKey((prev) => prev.filter((k) => k !== mappedKey));
       }, 500);
     };
 
     window.addEventListener("keydown", handleKeydown);
-    return () => window.removeEventListener("keydown", handleKeydown);
+    window.addEventListener("keyup", handleKeyup);
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+      window.removeEventListener("keyup", handleKeyup);
+    };
   }, [keyMap]);
 
   return (
@@ -42,7 +62,7 @@ export default function Keyboard({ keyMap }) {
         <div key={rowIndex} className={`key-row row-${rowIndex}`}>
           {row.map((key) => {
             const mappedKey = keyMap[key] || key;
-            const isCurrentKey = currentKey === mappedKey;
+            const isCurrentKey = currentKey.includes(mappedKey);
 
             return (
               <div
@@ -57,7 +77,7 @@ export default function Keyboard({ keyMap }) {
                   fontSize: "50px",
                 }}
               >
-                {showEntireMappedKeys || (showCurrentKey && isCurrentKey)
+                {showEntireMappedKeys || isCurrentKey
                   ? mappedKey
                   : ""}
               </div>
