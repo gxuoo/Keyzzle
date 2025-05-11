@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "../../../styles/main/playing/Timer.css";
 
-function Timer({ playTime, setPlayTime, gameState }) {
+function Timer({ gameState, playTime, setPlayTime }) {  
   useEffect(() => {
     let interval;
 
@@ -14,7 +14,7 @@ function Timer({ playTime, setPlayTime, gameState }) {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [setPlayTime, gameState]);
+  }, [gameState, setPlayTime]);
 
   const formatTime = (totalSeconds) => {
     const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');

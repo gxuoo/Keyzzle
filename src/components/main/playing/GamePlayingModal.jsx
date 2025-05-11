@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Timer from "./Timer";
 import Answer from "./Answer";
 import Keyboard from "./Keyboard";
@@ -7,29 +7,50 @@ import createKeyMap from "../utils/shuffleKey.js";
 
 export default function GamePlayingModal({ gameState, setGameState }) {
   const [playTime, setPlayTime] = useState(0);
-  const [keyMap, setKeyMap] = useState({});
+  const [keyMap] = useState(createKeyMap());
   const [userInputValue, setUserInputValue] = useState([]);
+  const [floatingChar, setFloatingChar] = useState(null);
 
-  // 게임 시작 시 키맵 초기화
-  useEffect(() => {
-    setKeyMap(createKeyMap());
-    setPlayTime(0);
-  }, []);
+  const handleKeyPressWithPosition = (char, fromPosition) => {
+    if (userInputValue.length >= 6 || floatingChar) return;
+
+    setUserInputValue((prevUserInput) => {
+      if (prevUserInput.length >= 6) return prevUserInput;
+
+      const newIndex = prevUserInput.length;
+      setFloatingChar({
+        char,
+        from: fromPosition,
+        to: null,
+        targetIndex: newIndex,
+      });
+      return prevUserInput;
+    });
+  };
 
   return (
     <>
       <Timer
+        gameState={gameState}
         playTime={playTime}
         setPlayTime={setPlayTime}
-        gameState={gameState}
       />
-      <Answer userInputValue={userInputValue} setGameState={setGameState} playTime={playTime} />
+      <Answer
+        userInputValue={userInputValue}
+        setGameState={setGameState}
+        playTime={playTime}
+      />
       <Submit
         keyMap={keyMap}
         userInputValue={userInputValue}
         setUserInputValue={setUserInputValue}
+        floatingChar={floatingChar}
+        setFloatingChar={setFloatingChar}
       />
-      <Keyboard keyMap={keyMap} />
+      <Keyboard
+        keyMap={keyMap}
+        onKeyPressWithPosition={handleKeyPressWithPosition}
+      />
     </>
   );
 }

@@ -3,30 +3,33 @@ import "../../../styles/main/playing/Answer.css";
 
 const answer = "GREEDY";
 
-export default function Answer({ userInputValue, setGameState, playTime }) {
+export default function Answer({ userInputValue, setGameState, playTime  }) {
     useEffect(() => {
         if (userInputValue.length === 6) {
             const userAnswer = userInputValue.join("");
             if (userAnswer === answer) {
                 const currentStudentId = localStorage.getItem('currentStudentId');
                 const savedPlayerRecords = localStorage.getItem('playerRecords');
-                const playerRecords = JSON.parse(savedPlayerRecords);
-
+                const playerRecords = JSON.parse(savedPlayerRecords) || [];
+        
                 const updatedPlayerRecords = playerRecords.map(record => {
-                    if (record.studentId === currentStudentId) {
-                        return {
-                            ...record,
-                            clearTime: playTime
-                        };
-                    }
-                    return record;
+                  if (record.studentId === currentStudentId) {
+                    return {
+                      ...record,
+                      clearTime: playTime
+                    };
+                  }
+                  return record;
                 });
 
                 localStorage.setItem('playerRecords', JSON.stringify(updatedPlayerRecords));
+                /*
+                    여기에 api POST 요청
+                */
                 setGameState("result");
             }
         }
-    }, [userInputValue, setGameState, playTime]);
+    }, [userInputValue, setGameState]);
 
     return (
         <div className="answer-container">
