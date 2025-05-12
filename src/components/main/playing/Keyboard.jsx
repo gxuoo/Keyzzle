@@ -7,7 +7,7 @@ export default function Keyboard({ keyMap }) {
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
     ["Z", "X", "C", "V", "B", "N", "M"],
   ];
-  
+
   const [showEntireMappedKeys, setShowEntireMappedKeys] = useState(false);
   const [currentKey, setCurrentKey] = useState([]);
   const [inputEnabled, setInputEnabled] = useState(false);
@@ -17,21 +17,21 @@ export default function Keyboard({ keyMap }) {
     const showTimer = setTimeout(() => {
       setShowEntireMappedKeys(true); // 0.1초 뒤에 보여줌
     }, 200);
-  
+
     const hideTimer = setTimeout(() => {
       setShowEntireMappedKeys(false); // 1.5초 뒤에 숨김
       setInputEnabled(true);
     }, 1600);
-  
+
     return () => {
       clearTimeout(showTimer);
       clearTimeout(hideTimer);
     };
   }, []);
-  
+
   useEffect(() => {
     const handleKeydown = (e) => {
-      if (!inputEnabled) return; 
+      if (!inputEnabled) return;
       if (e.repeat) return; // 키보드 이벤트 중복됨을 방지합니다. (성능 저하 방지용)
 
       const key = e.key.toUpperCase();
@@ -45,10 +45,10 @@ export default function Keyboard({ keyMap }) {
         setCurrentKey((prev) => [...prev, mappedKey]);
       }
     };
-    
+
     // 타이머를 키에서 손을 떼었을 때를 기준으로 시작합니다.
     const handleKeyup = (e) => {
-      if (!inputEnabled) return; 
+      if (!inputEnabled) return;
       const key = e.key.toUpperCase();
       if (!/^[a-zA-Z]$/.test(key)) return;
 
@@ -85,9 +85,8 @@ export default function Keyboard({ keyMap }) {
                 data-mapped={mappedKey}
               >
                 <span
-                  className={`key-label ${
-                    showEntireMappedKeys || isCurrentKey ? "visible" : ""
-                  }`}
+                  className={`key-label ${showEntireMappedKeys || isCurrentKey ? "visible" : ""
+                    }`}
                 >
                   {mappedKey}
                 </span>
