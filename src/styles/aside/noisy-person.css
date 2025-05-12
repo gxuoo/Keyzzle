@@ -13,9 +13,20 @@
     font-weight: bold;
     margin: 0;
     color: white;
+    margin-bottom: 10px;
+    animation: siso 3s infinite;
 }
 
-.noisy-person p {
+.noisy-person-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.noisy-person-list p {
     font-size: 25px;
     font-weight: bold;
     margin: 10px;
@@ -25,6 +36,32 @@
         color: #4CAF50;
         transform: scale(1.1);
         text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    }
+}
+
+@keyframes siso {
+    0% {
+        transform: rotate(0deg);
+        animation-timing-function: ease-in;
+    }
+
+    25% {
+        transform: rotate(12deg);
+        animation-timing-function: ease-in;
+    }
+
+    40% {
+        transform: rotate(0deg);
+        animation-timing-function: ease-out;
+    }
+
+    75% {
+        transform: rotate(-12deg);
+        animation-timing-function: ease-out;
+    }
+
+    100% {
+        transform: rotate(0deg);
     }
 }
 

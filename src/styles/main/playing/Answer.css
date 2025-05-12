@@ -7,6 +7,12 @@
     gap: 50px;
 }
 
+.answer-row {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
 .answer-letter {
     font-size: 80px;
     font-weight: bold;
@@ -24,4 +30,56 @@
     color: #FFC107;
     transform: scale(1.1);
     text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+@keyframes shake {
+    0% {
+        translate: 0;
+    }
+
+    10% {
+        translate: -5px;
+    }
+
+    20% {
+        translate: 5px;
+    }
+
+    30% {
+        translate: -5px;
+    }
+
+    40% {
+        translate: 5px;
+    }
+
+    50% {
+        translate: -5px;
+    }
+
+    60% {
+        translate: 5px;
+    }
+
+    70% {
+        translate: -5px;
+    }
+
+    80% {
+        translate: 5px;
+    }
+
+    90% {
+        translate: -5px;
+    }
+
+    100% {
+        translate: 0;
+    }
+}
+
+.answer-letter.wrong {
+    animation: shake 0.5s ease-in-out;
+    color: #ff4444 !important;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.5) !important;
 }
