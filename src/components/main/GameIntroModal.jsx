@@ -1,24 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import '../../styles/main/intro.css';
-import axios from 'axios';
 
 const GameIntroModal = ({ setGameState }) => {
   const [studentId, setStudentId] = useState('');
-
-  
-  useEffect(() => {
-    const fetchResult = async () => {
-      const response = await axios.get(`https://0by7j8suf2.execute-api.ap-northeast-2.amazonaws.com/proxy/api/leader-board/overall`, {
-          mode: 'cors',
-          headers: {
-            Authorization: "Bearer WIDJ*U@wojqdi@EJE@12+EII-Aw9deiaw9ied0qJ@OIEJaoiwja9d"
-          }
-        });
-        console.log(response);
-    }
-
-    fetchResult();
-}, []);
 
   const handleStart = () => {
     if (studentId) {
