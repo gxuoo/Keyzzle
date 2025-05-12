@@ -43,3 +43,13 @@ footer {
   box-shadow: 0 0 30px rgba(256, 256, 256, 0.8);
   background-color: #efefef;
 }
+
+.key-label {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.key-label.visible {
+  opacity: 1;
+}
