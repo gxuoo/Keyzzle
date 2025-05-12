@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../styles/main/result.css";
+import axios from "axios";
 
 // 공동 순위 계산 함수
 function getRankedList(players) {
@@ -22,6 +23,15 @@ function getRankedList(players) {
 function GameResultModal({ setGameState, onRestart }) {
     const [ranking, setRanking] = useState([]);
     const [myResult, setMyResult] = useState(null);
+
+    useEffect(() => {
+        const fetchResult = async () => {
+            const response = await axios.get(`${process.env.API_BASE_URL}/api/leaderboarf/keyzzle`);
+            setRanking(response);
+        }
+
+        fetchResult();
+    }, []);
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -104,7 +114,7 @@ function GameResultModal({ setGameState, onRestart }) {
                         <thead>
                             <tr>
                                 <th>순위</th>
-                                <th>학번</th>
+                                <th>이름름</th>
                                 <th>클리어 시간</th>
                             </tr>
                         </thead>
@@ -114,6 +124,11 @@ function GameResultModal({ setGameState, onRestart }) {
                                     <td>{student.rank}위</td>
                                     <td>{student.studentId}</td>
                                     <td>{formatTime(student.clearTime)}</td>
+                                    {/*
+                                        <td>{student.rank}위</td>
+                                        <td>{student.nickname}</td>
+                                        <td>{formatTime(student.score)}</td>
+                                    */}
                                 </tr>
                             ))}
                         </tbody>
