@@ -9,6 +9,7 @@ export default function Keyboard({ keyMap }) {
   ];
   const [showEntireMappedKeys, setShowEntireMappedKeys] = useState(false);
   const [currentKey, setCurrentKey] = useState([]);
+  const [inputEnabled, setInputEnabled] = useState(false);
   const holdKeys = useRef(new Set());
 
   useEffect(() => {
@@ -18,6 +19,7 @@ export default function Keyboard({ keyMap }) {
   
     const hideTimer = setTimeout(() => {
       setShowEntireMappedKeys(false); // 1.5초 뒤에 숨김
+      setInputEnabled(true);
     }, 1600);
   
     return () => {
@@ -29,6 +31,7 @@ export default function Keyboard({ keyMap }) {
 
   useEffect(() => {
     const handleKeydown = (e) => {
+      if (!inputEnabled) return; 
       if (e.repeat) return; // 키보드 이벤트 중복됨을 방지합니다. (성능 저하 방지용)
 
       const key = e.key.toUpperCase();
@@ -45,6 +48,7 @@ export default function Keyboard({ keyMap }) {
     
     // 타이머를 키에서 손을 떼었을 때를 기준으로 시작합니다.
     const handleKeyup = (e) => {
+      if (!inputEnabled) return; 
       const key = e.key.toUpperCase();
       if (!/^[a-zA-Z]$/.test(key)) return;
 
@@ -63,7 +67,7 @@ export default function Keyboard({ keyMap }) {
       window.removeEventListener("keydown", handleKeydown);
       window.removeEventListener("keyup", handleKeyup);
     };
-  }, [keyMap]);
+  }, [keyMap, inputEnabled]);
 
   return (
     <div className="keyboard">
