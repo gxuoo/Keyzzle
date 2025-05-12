@@ -1,6 +1,21 @@
+import { useEffect } from 'react';
 import '../../styles/main/intro1.css';
 
 const GameIntroModal = ({ setGameState }) => {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        setGameState('intro2');
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <div className="game-intro1-container">
       <div className="game-intro1-description">
