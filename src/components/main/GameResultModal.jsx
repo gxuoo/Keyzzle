@@ -8,12 +8,7 @@ function GameResultModal({ setGameState, onRestart }) {
 
     useEffect(() => {
         const fetchResult = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/leader-board/keyzzle`, {
-                mode: 'cors',
-                headers: {
-                  Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`
-                }
-              });
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/leader-board/keyzzle`);
             setRanking(response);
         }
 

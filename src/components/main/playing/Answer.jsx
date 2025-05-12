@@ -7,9 +7,14 @@ const answer = "GREEDY";
 export default function Answer({ userInputValue, setGameState, playTime }) {
     useEffect(() => {
         const postResult = async (data) => {
-            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/result`, {
-                data
-            });
+            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/result`,
+                { data },
+                {
+                    headers: {
+                        Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
+                    },
+                }
+            );
             console.log("data:", data);
         }
 
