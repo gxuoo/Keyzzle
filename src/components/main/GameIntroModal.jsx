@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../../styles/main/intro.css';
 
 const inputLines = Array.from({ length: 4 }, (_, i) => ({
@@ -7,9 +7,20 @@ const inputLines = Array.from({ length: 4 }, (_, i) => ({
 
 const GameIntroModal = ({ setGameState }) => {
   const [studentId, setStudentId] = useState('');
+  const studentIdRef = useRef('');
+
+  useEffect(() => {
+    studentIdRef.current = studentId;
+  }, [studentId]);  
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+      
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleStart();
+      return;
+    }
       if (e.key === "Backspace") {
         e.preventDefault();
         setStudentId(prev => prev.slice(0, -1));
@@ -31,7 +42,7 @@ const GameIntroModal = ({ setGameState }) => {
   }, []);
 
   const handleStart = () => {
-    if (studentId.length === 4) {
+    if (studentIdRef.current.length === 4) {
       const savedPlayerRecords = localStorage.getItem('playerRecords');
       let playerRecords = [];
       try {
@@ -40,16 +51,16 @@ const GameIntroModal = ({ setGameState }) => {
         playerRecords = [];
       }
 
-      if (!playerRecords.some(record => record.studentId === studentId)) {
+      if (!playerRecords.some(record => record.studentId === studentIdRef.currentntId)) {
         playerRecords.push({
-          studentId: studentId,
+          studentId: studentIdRef.current,
           clearTime: null,
           rank: null
         });
       }
 
       localStorage.setItem('playerRecords', JSON.stringify(playerRecords));
-      localStorage.setItem('currentStudentId', studentId);
+      localStorage.setItem('currentStudentId', studentIdRef.current);
 
       setGameState('playing');
     } else {
