@@ -7,15 +7,25 @@ export default function Keyboard({ keyMap }) {
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
     ["Z", "X", "C", "V", "B", "N", "M"],
   ];
-  const [showEntireMappedKeys, setShowEntireMappedKeys] = useState(true);
+  const [showEntireMappedKeys, setShowEntireMappedKeys] = useState(false);
   const [currentKey, setCurrentKey] = useState([]);
   const holdKeys = useRef(new Set());
 
   useEffect(() => {
-    setTimeout(() => {
-      setShowEntireMappedKeys(false);
-    }, 1500);
+    const showTimer = setTimeout(() => {
+      setShowEntireMappedKeys(true); // 0.1초 뒤에 보여줌
+    }, 200);
+  
+    const hideTimer = setTimeout(() => {
+      setShowEntireMappedKeys(false); // 1.5초 뒤에 숨김
+    }, 1600);
+  
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
   }, []);
+  
 
   useEffect(() => {
     const handleKeydown = (e) => {
@@ -70,9 +80,13 @@ export default function Keyboard({ keyMap }) {
                 data-original={key}
                 data-mapped={mappedKey}
               >
-                {showEntireMappedKeys || isCurrentKey
-                  ? mappedKey
-                  : ""}
+                <span
+                  className={`key-label ${
+                    showEntireMappedKeys || isCurrentKey ? "visible" : ""
+                  }`}
+                >
+                  {mappedKey}
+                </span>
               </div>
             );
           })}
