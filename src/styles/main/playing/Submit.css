@@ -6,19 +6,22 @@
     justify-content: center;
 }
 
-button {
-    width: 50%;
-    height: 50%;
-    background-color: rgb(12, 148, 12);
-    color: white;
-    border: none;
-    border-radius: 15px;
-    padding: 10px;
-    font-size: 25px;
-    font-weight: bold;
-    cursor: pointer;
+.input-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 
-    &:hover {
-        background-color: rgb(9, 107, 9);
-    }
+.input-board-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid white;
+    width: 70px;
+    height: 80px;
+    color: white;
+    font-size: 80px;
 }
