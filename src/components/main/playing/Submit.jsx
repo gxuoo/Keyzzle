@@ -44,9 +44,12 @@ export default function Submit({ keyMap, userInputValue, setUserInputValue }) {
 
   useEffect(() => {
     if (userInputValue.length === 6) {
-      setTimeout(() => {
-        setUserInputValue([]);
-      }, 300);
+      const userAnswer = userInputValue.join("");
+      if (userAnswer !== "GREEDY") {
+        setTimeout(() => {
+          setUserInputValue([]);
+        }, 200);
+      }
     }
   }, [userInputValue]);
 

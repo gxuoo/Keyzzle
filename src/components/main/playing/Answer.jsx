@@ -4,23 +4,11 @@ import axios from "axios";
 
 const answer = "GREEDY";
 
-export default function Answer({ userInputValue, setGameState, playTime }) {
+export default function Answer({ userInputValue, setGameState, playTime, setIsCorrect }) {
     useEffect(() => {
-        /*const postResult = async (data) => {
-            console.log("data:", data);
-            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/result`,
-                { data },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${process.env.REACT_APP_TOKEN}`,
-                    },
-                }
-            );
-        }*/
         const postResult = async (data) => {
             try {
-                const token = process.env.REACT_APP_TOKEN; // 토큰 가져오기
+                const token = process.env.REACT_APP_TOKEN;
                 const res = await fetch(
                     'https://0by7j8suf2.execute-api.ap-northeast-2.amazonaws.com/proxy/api/result',
                     {
@@ -28,9 +16,9 @@ export default function Answer({ userInputValue, setGameState, playTime }) {
                         mode: 'cors',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`, // Authorization 헤더에 토큰 삽입
+                            'Authorization': `Bearer ${token}`,
                         },
-                        body: data, // 서버로 보낼 데이터
+                        body: data,
                     }
                 );
 
@@ -42,10 +30,10 @@ export default function Answer({ userInputValue, setGameState, playTime }) {
             }
         };
 
-
         if (userInputValue.length === 6) {
             const userAnswer = userInputValue.join("");
             if (userAnswer === answer) {
+                setIsCorrect(true);
                 const currentStudentId = localStorage.getItem('currentStudentId');
                 const savedPlayerRecords = localStorage.getItem('playerRecords');
                 const playerRecords = JSON.parse(savedPlayerRecords);
@@ -59,7 +47,7 @@ export default function Answer({ userInputValue, setGameState, playTime }) {
                     }
                     return record;
                 });
-                console.log(currentStudentId);
+
                 const data = {
                     gameName: "keyzzle",
                     userId: currentStudentId,
@@ -67,10 +55,11 @@ export default function Answer({ userInputValue, setGameState, playTime }) {
                 }
 
                 localStorage.setItem('playerRecords', JSON.stringify(updatedPlayerRecords));
-
                 postResult(JSON.stringify(data));
 
-                setGameState("result");
+                setTimeout(() => {
+                    setGameState("result");
+                }, 2000);
             }
             else {
                 // 틀린 답을 입력했을 때 애니메이션 적용
@@ -84,7 +73,7 @@ export default function Answer({ userInputValue, setGameState, playTime }) {
                 });
             }
         }
-    }, [userInputValue, setGameState, playTime]);
+    }, [userInputValue, setGameState, playTime, setIsCorrect]);
 
     return (
         <div className="answer-container">

@@ -9,11 +9,13 @@ export default function GamePlayingModal({ gameState, setGameState }) {
   const [playTime, setPlayTime] = useState(0);
   const [keyMap, setKeyMap] = useState({});
   const [userInputValue, setUserInputValue] = useState([]);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   // 게임 시작 시 키맵 초기화
   useEffect(() => {
     setKeyMap(createKeyMap());
     setPlayTime(0);
+    setIsCorrect(false);
   }, []);
 
   return (
@@ -22,8 +24,14 @@ export default function GamePlayingModal({ gameState, setGameState }) {
         playTime={playTime}
         setPlayTime={setPlayTime}
         gameState={gameState}
+        isCorrect={isCorrect}
       />
-      <Answer userInputValue={userInputValue} setGameState={setGameState} playTime={playTime} />
+      <Answer
+        userInputValue={userInputValue}
+        setGameState={setGameState}
+        playTime={playTime}
+        setIsCorrect={setIsCorrect}
+      />
       <Submit
         keyMap={keyMap}
         userInputValue={userInputValue}

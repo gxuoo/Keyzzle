@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import "../../../styles/main/playing/Timer.css";
 
-function Timer({ playTime, setPlayTime, gameState }) {
+function Timer({ playTime, setPlayTime, gameState, isCorrect }) {
   useEffect(() => {
     let interval;
 
-    if (gameState === 'playing') {
+    if (gameState === 'playing' && !isCorrect) {
       interval = setInterval(() => {
         setPlayTime(prev => prev + 1);
       }, 1000);
@@ -14,7 +14,7 @@ function Timer({ playTime, setPlayTime, gameState }) {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [setPlayTime, gameState]);
+  }, [setPlayTime, gameState, isCorrect]);
 
   const formatTime = (totalSeconds) => {
     const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
