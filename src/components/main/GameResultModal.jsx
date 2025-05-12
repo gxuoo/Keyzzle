@@ -24,16 +24,18 @@ function GameResultModal({ setGameState, onRestart }) {
     const [ranking, setRanking] = useState([]);
     const [myResult, setMyResult] = useState(null);
 
-    /*
     useEffect(() => {
         const fetchResult = async () => {
-            const response = await axios.get(`${process.env.API_BASE_URL}/api/leaderboarf/keyzzle`);
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/leader-board/keyzzle`, {
+                headers: {
+                  Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`
+                }
+              });
             setRanking(response);
         }
 
         fetchResult();
     }, []);
-    */
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -52,15 +54,6 @@ function GameResultModal({ setGameState, onRestart }) {
         } catch {
             playerRecords = [];
         }
-
-        // completionTime이 있는 학생들만 필터링하고 시간순으로 정렬
-        const sortedPlayers = playerRecords
-            .filter(player => player.clearTime)
-            .sort((a, b) => a.clearTime - b.clearTime)
-            .slice(0, 5);
-
-        const rankedPlayers = getRankedList(sortedPlayers);
-        setRanking(rankedPlayers);
 
         // 현재 플레이어의 결과 찾기
         const currentId = localStorage.getItem('currentStudentId');

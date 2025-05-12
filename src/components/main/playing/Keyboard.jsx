@@ -10,12 +10,13 @@ export default function Keyboard({ keyMap }) {
   const [showEntireMappedKeys, setShowEntireMappedKeys] = useState(true);
   const [currentKey, setCurrentKey] = useState(null);
   const [showCurrentKey, setShowCurrentKey] = useState(false);
-
+/*
   useEffect(() => {
     setTimeout(() => {
       setShowEntireMappedKeys(false);
     }, 1500);
   }, []);
+  */
 
   useEffect(() => {
     const handleKeydown = (e) => {
