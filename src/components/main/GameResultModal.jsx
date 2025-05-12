@@ -24,6 +24,7 @@ function GameResultModal({ setGameState, onRestart }) {
     const [ranking, setRanking] = useState([]);
     const [myResult, setMyResult] = useState(null);
 
+    /*
     useEffect(() => {
         const fetchResult = async () => {
             const response = await axios.get(`${process.env.API_BASE_URL}/api/leaderboarf/keyzzle`);
@@ -32,6 +33,7 @@ function GameResultModal({ setGameState, onRestart }) {
 
         fetchResult();
     }, []);
+    */
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
