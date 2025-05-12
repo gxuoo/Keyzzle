@@ -2,24 +2,6 @@ import { useEffect, useState } from "react";
 import "../../styles/main/result.css";
 import axios from "axios";
 
-// 공동 순위 계산 함수
-function getRankedList(players) {
-    let rank = 1;
-    let prevTime = null;
-    let sameRankCount = 0;
-
-    return players.map((player, idx) => {
-        if (player.clearTime === prevTime) {
-            sameRankCount++;
-        } else {
-            rank = idx + 1;
-            sameRankCount = 1;
-        }
-        prevTime = player.clearTime;
-        return { ...player, rank };
-    });
-}
-
 function GameResultModal({ setGameState, onRestart }) {
     const [ranking, setRanking] = useState([]);
     const [myResult, setMyResult] = useState(null);
@@ -27,6 +9,7 @@ function GameResultModal({ setGameState, onRestart }) {
     useEffect(() => {
         const fetchResult = async () => {
             const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/leader-board/keyzzle`, {
+                mode: 'cors',
                 headers: {
                   Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`
                 }

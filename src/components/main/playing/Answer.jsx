@@ -1,10 +1,18 @@
 import { useEffect } from "react";
 import "../../../styles/main/playing/Answer.css";
+import axios from "axios";
 
 const answer = "GREEDY";
 
 export default function Answer({ userInputValue, setGameState, playTime }) {
     useEffect(() => {
+        const postResult = async (data) => {
+            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/result`, {
+                data
+            });
+            console.log("data:", data);
+        }
+
         if (userInputValue.length === 6) {
             const userAnswer = userInputValue.join("");
             if (userAnswer === answer) {
@@ -22,7 +30,16 @@ export default function Answer({ userInputValue, setGameState, playTime }) {
                     return record;
                 });
 
+                const data = {
+                    gameName: "keyzzle",
+                    userId: currentStudentId,
+                    score: playTime,
+                }
+
                 localStorage.setItem('playerRecords', JSON.stringify(updatedPlayerRecords));
+
+                postResult(data);
+
                 setGameState("result");
             }
         }
