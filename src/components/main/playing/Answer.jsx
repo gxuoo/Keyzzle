@@ -6,17 +6,42 @@ const answer = "GREEDY";
 
 export default function Answer({ userInputValue, setGameState, playTime }) {
     useEffect(() => {
-        const postResult = async (data) => {
+        /*const postResult = async (data) => {
+            console.log("data:", data);
             await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/result`,
                 { data },
                 {
                     headers: {
-                        Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${process.env.REACT_APP_TOKEN}`,
                     },
                 }
             );
-            console.log("data:", data);
-        }
+        }*/
+            const postResult = async (data) => {
+                try {
+                    const token = process.env.REACT_APP_TOKEN; // 토큰 가져오기
+                    const res = await fetch(
+                        'https://0by7j8suf2.execute-api.ap-northeast-2.amazonaws.com/proxy/api/result',
+                        {
+                            method: 'POST',
+                            mode: 'cors',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`, // Authorization 헤더에 토큰 삽입
+                            },
+                            body: data, // 서버로 보낼 데이터
+                        }
+                    );
+    
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    
+                    console.log('점수 전송 성공');
+                } catch (e) {
+                    console.error('전송 오류:', e);
+                }
+            };
+        
 
         if (userInputValue.length === 6) {
             const userAnswer = userInputValue.join("");
@@ -34,7 +59,7 @@ export default function Answer({ userInputValue, setGameState, playTime }) {
                     }
                     return record;
                 });
-
+console.log(currentStudentId);
                 const data = {
                     gameName: "keyzzle",
                     userId: currentStudentId,
@@ -43,7 +68,7 @@ export default function Answer({ userInputValue, setGameState, playTime }) {
 
                 localStorage.setItem('playerRecords', JSON.stringify(updatedPlayerRecords));
 
-                postResult(data);
+                postResult(JSON.stringify(data));
 
                 setGameState("result");
             }
