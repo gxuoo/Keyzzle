@@ -7,6 +7,7 @@ export default function Keyboard({ keyMap }) {
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
     ["Z", "X", "C", "V", "B", "N", "M"],
   ];
+  
   const [showEntireMappedKeys, setShowEntireMappedKeys] = useState(false);
   const [currentKey, setCurrentKey] = useState([]);
   const [inputEnabled, setInputEnabled] = useState(false);
@@ -28,7 +29,6 @@ export default function Keyboard({ keyMap }) {
     };
   }, []);
   
-
   useEffect(() => {
     const handleKeydown = (e) => {
       if (!inputEnabled) return; 

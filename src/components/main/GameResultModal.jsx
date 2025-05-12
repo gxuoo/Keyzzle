@@ -1,27 +1,19 @@
 import { useEffect, useState } from "react";
 import "../../styles/main/result.css";
-
-// 공동 순위 계산 함수
-function getRankedList(players) {
-    let rank = 1;
-    let prevTime = null;
-    let sameRankCount = 0;
-
-    return players.map((player, idx) => {
-        if (player.clearTime === prevTime) {
-            sameRankCount++;
-        } else {
-            rank = idx + 1;
-            sameRankCount = 1;
-        }
-        prevTime = player.clearTime;
-        return { ...player, rank };
-    });
-}
+import axios from "axios";
 
 function GameResultModal({ setGameState, onRestart }) {
     const [ranking, setRanking] = useState([]);
     const [myResult, setMyResult] = useState(null);
+
+    useEffect(() => {
+        const fetchResult = async () => {
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/leader-board/keyzzle`);
+            setRanking(response);
+        }
+
+        fetchResult();
+    }, []);
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -40,15 +32,6 @@ function GameResultModal({ setGameState, onRestart }) {
         } catch {
             playerRecords = [];
         }
-
-        // completionTime이 있는 학생들만 필터링하고 시간순으로 정렬
-        const sortedPlayers = playerRecords
-            .filter(player => player.clearTime)
-            .sort((a, b) => a.clearTime - b.clearTime)
-            .slice(0, 5);
-
-        const rankedPlayers = getRankedList(sortedPlayers);
-        setRanking(rankedPlayers);
 
         // 현재 플레이어의 결과 찾기
         const currentId = localStorage.getItem('currentStudentId');
@@ -104,7 +87,7 @@ function GameResultModal({ setGameState, onRestart }) {
                         <thead>
                             <tr>
                                 <th>순위</th>
-                                <th>학번</th>
+                                <th>이름름</th>
                                 <th>클리어 시간</th>
                             </tr>
                         </thead>
@@ -114,6 +97,11 @@ function GameResultModal({ setGameState, onRestart }) {
                                     <td>{student.rank}위</td>
                                     <td>{student.studentId}</td>
                                     <td>{formatTime(student.clearTime)}</td>
+                                    {/*
+                                        <td>{student.rank}위</td>
+                                        <td>{student.nickname}</td>
+                                        <td>{formatTime(student.score)}</td>
+                                    */}
                                 </tr>
                             ))}
                         </tbody>
