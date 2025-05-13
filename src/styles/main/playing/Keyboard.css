@@ -24,6 +24,10 @@ footer {
   padding: 5px;
 }
 
+.key-row:last-of-type {
+  margin-right: 90px;
+}
+
 .key-block {
   width: 80px;
   height: 80px;
