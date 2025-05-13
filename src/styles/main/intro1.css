@@ -39,12 +39,14 @@
     color: #FFE5B4;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s infinite;
 }
 
 .highlight-lightskyblue {
     color: #87CEFA;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s infinite;
 }
 
 .highlight-red {

@@ -51,6 +51,23 @@ function GameResultModal({ setGameState, onRestart }) {
         }
     }, []);
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+
+            if (e.key === "Enter") {
+                e.preventDefault();
+                handleRestart();
+                return;
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
     const handleRestart = () => {
         setGameState('intro');
         onRestart();
@@ -66,7 +83,7 @@ function GameResultModal({ setGameState, onRestart }) {
                         <thead>
                             <tr>
                                 <th>순위</th>
-                                <th>학번</th>
+                                <th>고유번호</th>
                                 <th>클리어 시간</th>
                             </tr>
                         </thead>
@@ -87,7 +104,7 @@ function GameResultModal({ setGameState, onRestart }) {
                         <thead>
                             <tr>
                                 <th>순위</th>
-                                <th>이름름</th>
+                                <th>고유번호</th>
                                 <th>클리어 시간</th>
                             </tr>
                         </thead>
@@ -107,7 +124,7 @@ function GameResultModal({ setGameState, onRestart }) {
                         </tbody>
                     </table>
                 ) : (
-                    <p>아직 완료한 플레이어가 없습니다.</p>
+                    <p className="highlight-yellow">아직 완료한 플레이어가 없습니다.</p>
                 )}
             </div>
             <button className="game-result-modal-button" onClick={handleRestart}>
