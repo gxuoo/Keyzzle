@@ -73,6 +73,7 @@ npm install
 프로젝트 루트 디렉토리에 `.env` 파일을 생성하고 다음 내용을 추가합니다:
 
 ```env
+REACT_APP_API_BASE_URL=your_base_url_here
 REACT_APP_TOKEN=your_api_token_here
 ```
 
