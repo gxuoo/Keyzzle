@@ -27,7 +27,7 @@ const GameIntroModal2 = ({ setGameState }) => {
             } else if (e.key.length === 1 && /^[a-zA-Z0-9]$/.test(e.key)) {
                 setStudentId(prev => {
                     if (prev.length < 4) {
-                        return prev + e.key.toUpperCase();
+                        return prev + e.key;
                     }
                     return prev;
                 });
