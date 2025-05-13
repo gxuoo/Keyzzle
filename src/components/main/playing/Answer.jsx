@@ -23,8 +23,6 @@ export default function Answer({ userInputValue, setGameState, playTime, setIsCo
                 );
 
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-                console.log('점수 전송 성공');
             } catch (e) {
                 console.error('전송 오류:', e);
             }

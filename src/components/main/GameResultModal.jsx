@@ -33,7 +33,7 @@ function GameResultModal({ setGameState, onRestart }) {
         }
         
         getUserName();
-    }, [])
+    }, []);
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -44,7 +44,6 @@ function GameResultModal({ setGameState, onRestart }) {
         return `${minutes}분 ${remainingSeconds.toString().padStart(2, '0')}초`;
     };
 
-console.log(currentPlayer);
     useEffect(() => {
         const handleKeyDown = (e) => {
 

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import '../../styles/main/intro2.css';
+import axios from 'axios';
 
 const inputLines = Array.from({ length: 4 }, (_, i) => ({
     id: `input-block-${i}`,
@@ -41,17 +42,34 @@ const GameIntroModal2 = ({ setGameState }) => {
         };
     }, []);
 
-    const handleStart = () => {
-        if (studentIdRef.current.length === 4) {
+    const handleStart = async () => {
+        if (studentIdRef.current.length !== 4) {
+            alert('고유 번호를 4자리 입력해주세요!');
+            return;
+        }
+
+        try {
+        // 1. 유저 정보 확인
+            await axios.get(
+                `${process.env.REACT_APP_API_BASE_URL}/api/users/${studentIdRef.current}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
+                    },
+                }
+            );
+
+        // 2. 로컬스토리지 저장
             const savedPlayerRecords = localStorage.getItem('playerRecords');
             let playerRecords = [];
+
             try {
                 playerRecords = savedPlayerRecords ? JSON.parse(savedPlayerRecords) : [];
             } catch {
                 playerRecords = [];
             }
 
-            if (!playerRecords.some(record => record.studentId === studentIdRef.currentntId)) {
+            if (!playerRecords.some(record => record.studentId === studentIdRef.current)) {
                 playerRecords.push({
                     studentId: studentIdRef.current,
                     clearTime: null,
@@ -62,9 +80,13 @@ const GameIntroModal2 = ({ setGameState }) => {
             localStorage.setItem('playerRecords', JSON.stringify(playerRecords));
             localStorage.setItem('currentStudentId', studentIdRef.current);
 
+            // 3. 게임 시작
             setGameState('playing');
-        } else {
-            alert('고유 번호를 4자리 입력해주세요!');
+        } catch (error) {
+            // 404 또는 기타 에러 처리
+            console.error('유저 정보 확인 실패:', error);
+            alert('존재하지 않는 고유 번호입니다. 다시 입력해주세요.');
+            setStudentId('');
         }
     };
 
