@@ -59,7 +59,7 @@ export default function Answer({ userInputValue, setGameState, playTime, setIsCo
 
                 setTimeout(() => {
                     setGameState("result");
-                }, 2000);
+                }, 1500);
             }
             else {
                 // 틀린 답을 입력했을 때 애니메이션 적용
