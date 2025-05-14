@@ -24,6 +24,7 @@ export default function GamePlayingModal({ gameState, setGameState }) {
         playTime={playTime}
         setPlayTime={setPlayTime}
         gameState={gameState}
+        setGameState={setGameState}
         isCorrect={isCorrect}
       />
       <Answer
