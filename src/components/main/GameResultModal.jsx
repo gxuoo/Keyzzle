@@ -13,7 +13,7 @@ function GameResultModal({ setGameState, onRestart }) {
     }, [ranking, username]);
     const [failed, setFailed] = useState(false);
     const clearTime = localStorage.getItem('clearTime');
-console.log(currentPlayer);
+
     useEffect(() => {
         if (clearTime >= 120) {
             setFailed(true);
@@ -90,7 +90,7 @@ console.log(currentPlayer);
                         <tr>
                             <td>{(!failed || !currentPlayer) ? "등외" : `${currentPlayer.rank}위`}</td>
                             <td>{username}</td>
-                            <td>{!failed ? "--" : formatTime(clearTime)}</td>
+                            <td>{!failed ? "실패" : formatTime(clearTime)}</td>
                         </tr>
                     </tbody>
                 </table>
