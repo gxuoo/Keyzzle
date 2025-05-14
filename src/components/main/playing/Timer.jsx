@@ -11,7 +11,7 @@ function Timer({ playTime, setPlayTime, gameState, setGameState, isCorrect }) {
       }, 1000);
     }
 
-    if (playTime === 5) {
+    if (playTime === 120) {
       setGameState("result");
     }
 
@@ -28,7 +28,7 @@ function Timer({ playTime, setPlayTime, gameState, setGameState, isCorrect }) {
 
   return (
     <div className="timer">
-      게임 시간 {formatTime(5 - playTime)}
+      게임 시간 {formatTime(120 - playTime)}
     </div>
   );
 }

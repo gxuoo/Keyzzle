@@ -15,7 +15,7 @@ function GameResultModal({ setGameState, onRestart }) {
     const clearTime = localStorage.getItem('clearTime');
 
     useEffect(() => {
-        if (clearTime >= 120) {
+        if (clearTime === 120) {
             setFailed(true);
             return; // api 미호출
         }
