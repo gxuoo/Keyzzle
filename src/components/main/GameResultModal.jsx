@@ -11,8 +11,15 @@ function GameResultModal({ setGameState, onRestart }) {
       }
       return null;
     }, [ranking, username]);
-
+    const [failed, setFailed] = useState(false);
+    const clearTime = localStorage.getItem('clearTime');
+console.log(currentPlayer);
     useEffect(() => {
+        if (clearTime >= 120) {
+            setFailed(true);
+            return; // api 미호출
+        }
+
         const fetchResult = async () => {
             const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/leader-board/keyzzle`);
             setRanking(response.data.rankings);
@@ -69,27 +76,25 @@ function GameResultModal({ setGameState, onRestart }) {
     return (
         <div className="game-result-modal-container">
             <h1 className="game-result-modal-title">게임 결과</h1>
-            {currentPlayer && (
-                <div className="my-result-container">
-                    <h2>나의 게임 결과</h2>
-                    <table className="my-result-table">
-                        <thead>
-                            <tr>
-                                <th>순위</th>
-                                <th>닉네임</th>
-                                <th>클리어 시간</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{currentPlayer.rank}위</td>
-                                <td>{currentPlayer.nickname}</td>
-                                <td>{formatTime(currentPlayer.score)}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            )}
+            <div className="my-result-container">
+                <h2>나의 게임 결과</h2>
+                <table className="my-result-table">
+                    <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>닉네임</th>
+                            <th>클리어 시간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{(!failed || !currentPlayer) ? "등외" : `${currentPlayer.rank}위`}</td>
+                            <td>{username}</td>
+                            <td>{!failed ? "--" : formatTime(clearTime)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div className="ranking-container">
                 <h2>최종 순위</h2>
                 {ranking.length > 0 ? (

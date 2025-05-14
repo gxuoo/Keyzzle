@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "../../../styles/main/playing/Timer.css";
 
-function Timer({ playTime, setPlayTime, gameState, isCorrect }) {
+function Timer({ playTime, setPlayTime, gameState, setGameState, isCorrect }) {
   useEffect(() => {
     let interval;
 
@@ -11,10 +11,14 @@ function Timer({ playTime, setPlayTime, gameState, isCorrect }) {
       }, 1000);
     }
 
+    if (playTime === 120) {
+      setGameState("result");
+    }
+
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [setPlayTime, gameState, isCorrect]);
+  }, [playTime, setPlayTime, gameState, isCorrect]);
 
   const formatTime = (totalSeconds) => {
     const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
@@ -24,7 +28,7 @@ function Timer({ playTime, setPlayTime, gameState, isCorrect }) {
 
   return (
     <div className="timer">
-      게임 시간 {formatTime(playTime)}
+      게임 시간 {formatTime(120 - playTime)}
     </div>
   );
 }
